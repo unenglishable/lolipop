@@ -10,15 +10,24 @@ Using
 var lolipop = require('path_to_lolipop');
 ~~~~
 
+Configuration
+-------------
+
+To connect to a mysql database, set environment variables:
+
+~~~~
+LOLIPOP_HOST // The host to connec to
+LOLIPOP_USER // The user to connect as
+LOLIPOP_PASS // The password for the user
+LOLIPOP_DB   // The database to connect to
+~~~~
+
+
 Showing tables
 --------------
 
 ~~~~
-lolipop.showTables(err, connection, [database, ] callback(tables));
+lolipop.showTables(err, callback(err, tables));
 ~~~~
 
-`connection` is a [node-mysql] (https://github.com/felixge/node-mysql 
-"node-mysql") object that has already been connected with the
-`connection.connect()` method.  `tables` is an array containing the table names
-in the database. Optional argument `database` provides the database name as a
-string if it was not already specified in when initializing the connection.
+Database connection is now defined in [config.js](./config.js).
