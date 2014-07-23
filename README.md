@@ -3,16 +3,15 @@ lolipop
 
 A utility to make calls to mysql through nodejs (somewhat) more modular.
 
-Using
------
-
-~~~~
-var lolipop = require('path_to_lolipop');
-~~~~
 
 Configuration
 -------------
 
+The config passed to a method is the information used by node-mysql to connect
+to a mysql database.  You can define this on the fly or use a config.js module
+like the included example [config_example.js](./config_example.js)
+
+In the example config:
 To connect to a mysql database, set environment variables:
 
 ~~~~
@@ -22,12 +21,15 @@ LOLIPOP_PASS // The password for the user
 LOLIPOP_DB   // The database to connect to
 ~~~~
 
+OR change the config.js yourself
+
 
 Showing tables
 --------------
 
 ~~~~
-lolipop.showTables(err, callback(err, tables));
-~~~~
+var lolipop = require('path_to_lolipop');
+var config = require('./config');
 
-Database connection is now defined in [config.js](./config.js).
+lolipop.showTables(err, config['lolipopdb'], callback(err, tables));
+~~~~
