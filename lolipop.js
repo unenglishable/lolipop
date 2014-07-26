@@ -7,7 +7,7 @@ var Lolipop = module.exports = function Lolipop(config) {
   this.connection = mysql.createConnection(config);
 }
 
-Lolipop.prototype.showTables = function (err, callback) {
+Lolipop.prototype.getTables = function (err, callback) {
   if (err) {
     return callback(err);
   }
@@ -22,7 +22,7 @@ Lolipop.prototype.showTables = function (err, callback) {
   });
 }
 
-Lolipop.prototype.showColumns = function (err, table, callback) {
+Lolipop.prototype.getColumns = function (err, table, callback) {
   if (err) {
     return callback(err);
   }
@@ -34,7 +34,7 @@ Lolipop.prototype.showColumns = function (err, table, callback) {
   });
 }
 
-Lolipop.prototype.streamRows = function (err, table) {
+Lolipop.prototype.createRowStream = function (err, table) {
   return this.connection.query('SELECT * FROM ' + mysql.escapeId(table));
 }
 

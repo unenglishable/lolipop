@@ -2,7 +2,7 @@ var lolipop = require('./lolipop');
 var config = require('./config.json');
 var lp = lolipop(config);
 
-lp.showTables(null, function (err, tables) {
+lp.getTables(null, function (err, tables) {
   if (err) {
     throw err;
   }
@@ -10,7 +10,7 @@ lp.showTables(null, function (err, tables) {
   console.log('Tables:\n'+tables);
 });
 
-lp.showColumns(null, 'test_table', function (err, columns) {
+lp.getColumns(null, 'test_table', function (err, columns) {
   if (err) {
     throw err;
   }
@@ -18,7 +18,7 @@ lp.showColumns(null, 'test_table', function (err, columns) {
   console.log('Columns:\n'+columns);
 });
 
-var rowStream = lp.streamRows(null, 'test_table');
+var rowStream = lp.createRowStream(null, 'test_table');
 rowStream.on('error', function (err) {
   console.error(err)
 })

@@ -43,7 +43,7 @@ lp.end();
 ~~~~
 
 
-Showing tables
+Get tables
 --------------
 
 ~~~~
@@ -51,10 +51,10 @@ var config = require('./config.json');
 var lolipop = require('./lolipop');
 var lp = lolipop(config);
 
-lp.showTables(err, callback(err, tables));
+lp.getTables(err, callback(err, tables));
 ~~~~
 
-Showing columns
+Get columns
 --------------
 
 ~~~~
@@ -64,7 +64,7 @@ var lp = lolipop(config);
 
 // table is a String, the name of the table
 // the input is escaped
-lp.showColumns(err, table, callback(err, tables));
+lp.getColumns(err, table, callback(err, tables));
 ~~~~
 
 Streaming rows
@@ -75,7 +75,7 @@ Streaming rows
 
 // table is a String, the name of the table
 // the input is escaped
-var rowStream = lp.streamRows(err, table);
+var rowStream = lp.createRowStream(err, table);
 rowStream.on('error', function {
   // do something with error
 })
