@@ -35,7 +35,7 @@ Lolipop.prototype.getColumns = function (err, table, callback) {
 }
 
 Lolipop.prototype.createRowStream = function (err, table) {
-  return this.connection.query('SELECT * FROM ' + mysql.escapeId(table));
+  return this.connection.query('SELECT * FROM ' + mysql.escapeId(table)).stream();
 }
 
 Lolipop.prototype.end = function (callback) {
