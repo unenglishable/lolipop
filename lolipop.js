@@ -1,6 +1,6 @@
 var mysql = require('mysql');
 
-var Lolipop = function Lolipop(config) {
+var Lolipop = module.exports = function Lolipop(config) {
   if (!(this instanceof Lolipop)) {
     return new Lolipop(config);
   }
@@ -46,5 +46,3 @@ Lolipop.prototype.end = function (callback) {
     this.connection.end();
   }
 }
-
-module.exports = Lolipop;
