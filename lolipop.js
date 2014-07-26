@@ -1,16 +1,22 @@
 var mysql = require('mysql');
 var config = require('./config');
 var dbConfig = config.lolipopdb;
-var connection = mysql.createConnection(dbConfig);
 
-exports.showTables = function (err, callback) {
+var Lolipop = function Lolipop() {
+  if (!(this instanceof Lolipop)) {
+    return new Lolipop();
+  }
+  this.connection = mysql.createConnection(dbConfig);
+}
+
+Lolipop.prototype.showTables = function (err, callback) {
   if (err) {
     return callback(err);
   }
 
   var tables = [];
 
-  connection.query('SHOW tables', function (err, rows) {
+  this.connection.query('SHOW tables', function (err, rows) {
     rows.forEach(function (row) {
       tables.push(row[Object.keys(row)[0]]);
     });
@@ -18,27 +24,29 @@ exports.showTables = function (err, callback) {
   });
 }
 
-exports.showColumns = function (err, table, callback) {
+Lolipop.prototype.showColumns = function (err, table, callback) {
   if (err) {
     return callback(err);
   }
 
-  connection.query('SHOW columns FROM ' + mysql.escapeId(table), function (err, rows) {
+  this.connection.query('SHOW columns FROM ' + mysql.escapeId(table), function (err, rows) {
     if (callback && typeof(callback) === "function") {
       callback(null, rows);
     }
   });
 }
 
-exports.streamRows = function (err, table) {
-  return connection.query('SELECT * FROM ' + mysql.escapeId(table));
+Lolipop.prototype.streamRows = function (err, table) {
+  return this.connection.query('SELECT * FROM ' + mysql.escapeId(table));
 }
 
-exports.end = function (callback) {
+Lolipop.prototype.end = function (callback) {
   if (callback && typeof(callback) === "function") {
-    connection.end(callback());
+    this.connection.end(callback());
   }
   else {
-    connection.end();
+    this.connection.end();
   }
 }
+
+module.exports = Lolipop;
