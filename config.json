@@ -1,0 +1,6 @@
+{
+  "host" : "localhost",
+  "user" :  "lolipop",
+  "password" :  "",
+  "database" : "lolipop_test"
+}

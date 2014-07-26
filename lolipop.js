@@ -1,12 +1,10 @@
 var mysql = require('mysql');
-var config = require('./config');
-var dbConfig = config.lolipopdb;
 
-var Lolipop = function Lolipop() {
+var Lolipop = function Lolipop(config) {
   if (!(this instanceof Lolipop)) {
-    return new Lolipop();
+    return new Lolipop(config);
   }
-  this.connection = mysql.createConnection(dbConfig);
+  this.connection = mysql.createConnection(config);
 }
 
 Lolipop.prototype.showTables = function (err, callback) {

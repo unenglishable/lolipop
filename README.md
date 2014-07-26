@@ -3,33 +3,53 @@ lolipop
 
 A utility to make calls to mysql through nodejs (somewhat) more modular.
 
-
 Configuration
 -------------
 
-The config passed to a method is the information used by node-mysql to connect
-to a mysql database.  You can define this on the fly or use a config.js module
-like the included example [config_example.js](./config_example.js)
+Configuration can be stored in a json file.
 
-In the example config:
-To connect to a mysql database, set environment variables:
-
+<h3>config.json</h3>
 ~~~~
-LOLIPOP_HOST // The host to connec to
-LOLIPOP_USER // The user to connect as
-LOLIPOP_PASS // The password for the user
-LOLIPOP_DB   // The database to connect to
+{
+  "host" : "localhost",
+  "user" :  "lolipop",
+  "password" :  "",
+  "database" : "lolipoptest"
+}
 ~~~~
 
-OR change the config.js yourself
+Instantiation
+-------------
+
+~~~~
+var config = require('./config.json');
+var lolipop = require('./lolipop');
+var lp = lolipop(config);
+~~~~
+
+
+The config is used by node-mysql to connect to a mysql database.
+You can define this in the config.json file
+like the included example [config.json](./config.json)
+
+
+Closing
+-------
+
+You should always close the connection using:
+~~~~
+...
+lp.end();
+~~~~
 
 
 Showing tables
 --------------
 
 ~~~~
-var lolipop = require('path_to_lolipop');
-var config = require('./config');
+var config = require('./config.json');
+var lolipop = require('./lolipop');
+var lp = lolipop(config);
 
-lolipop.showTables(err, config['lolipopdb'], callback(err, tables));
+lp.showTables(err, callback(err, tables));
 ~~~~
