@@ -39,7 +39,7 @@ Lolipop.prototype.createRowStream = function (err, table) {
 }
 
 Lolipop.prototype.createRowStreamWhere = function (err, table, obj) {
-  return this.connection.query('SELECT * FROM ' + mysql.escapeId(table) + ' WHERE ' + mysql.escape(obj));
+  return this.connection.query('SELECT * FROM ' + mysql.escapeId(table) + ' WHERE ' + mysql.escape(obj)).stream();
 }
 
 Lolipop.prototype.end = function (callback) {
