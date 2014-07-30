@@ -38,6 +38,11 @@ Lolipop.prototype.createRowStream = function (err, table) {
   return this.connection.query('SELECT * FROM ' + mysql.escapeId(table)).stream();
 }
 
+Lolipop.prototype.createRowStreamWhere = function (err, table, obj) {
+  console.log('SELECT * FROM ' + mysql.escapeId(table) + ' WHERE ' + mysql.escape(obj));
+  return this.connection.query('SELECT * FROM ' + mysql.escapeId(table) + ' WHERE ' + mysql.escape(obj));
+}
+
 Lolipop.prototype.end = function (callback) {
   if (callback && typeof(callback) === "function") {
     this.connection.end(callback());

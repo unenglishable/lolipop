@@ -23,7 +23,15 @@ rowStream.on('error', function (err) {
   console.error(err)
 })
 .on('result', function(row) {
-  console.log(row.Field);
+  console.log(row);
+});
+
+var rowStreamWhere = lp.createRowStreamWhere(null, 'test_table', { percent: 10 });
+rowStreamWhere.on('error', function (err) {
+  console.error(err)
+})
+.on('result', function(row) {
+  console.log('test: ' + row.percent);
 });
 
 lp.end();

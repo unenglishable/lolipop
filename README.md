@@ -83,3 +83,15 @@ rowStream.on('error', function {
   // do something with result
 });
 ~~~~
+
+Streaming rows with WHERE
+-------------------------
+
+~~~~
+...
+
+var obj = { field : value };
+
+var rowStreamWhere = lolipop.createRowStreamWhere(err, table, obj);
+// SELECT * FROM 'table' WHERE 'field' = value;
+~~~~
