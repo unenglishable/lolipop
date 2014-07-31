@@ -4,7 +4,7 @@ var Lolipop = module.exports = function Lolipop(config) {
   if (!(this instanceof Lolipop)) {
     return new Lolipop(config);
   }
-  this.connection = mysql.createConnection(config);
+  this.connection = mysql.createPool(config);
 }
 
 Lolipop.prototype.getTables = function (err, callback) {
