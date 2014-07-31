@@ -34,4 +34,4 @@ rowStreamWhere.on('error', function (err) {
   console.log('test: ' + row.percent);
 });
 
-lp.end();
+//lp.end();
