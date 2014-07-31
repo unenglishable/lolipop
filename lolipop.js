@@ -4,7 +4,7 @@ var Lolipop = module.exports = function Lolipop(config) {
   if (!(this instanceof Lolipop)) {
     return new Lolipop(config);
   }
-  this.connection = mysql.createPool(config);
+  this.pool = mysql.createPool(config);
 }
 
 Lolipop.prototype.getTables = function (err, callback) {
@@ -14,7 +14,7 @@ Lolipop.prototype.getTables = function (err, callback) {
 
   var tables = [];
 
-  this.connection.query('SHOW tables', function (err, rows) {
+  this.pool.query('SHOW tables', function (err, rows) {
     rows.forEach(function (row) {
       tables.push(row[Object.keys(row)[0]]);
     });
@@ -27,7 +27,7 @@ Lolipop.prototype.getColumns = function (err, table, callback) {
     return callback(err);
   }
 
-  this.connection.query('SHOW columns FROM ' + mysql.escapeId(table), function (err, rows) {
+  this.pool.query('SHOW columns FROM ' + mysql.escapeId(table), function (err, rows) {
     if (callback && typeof(callback) === "function") {
       callback(null, rows);
     }
@@ -35,11 +35,11 @@ Lolipop.prototype.getColumns = function (err, table, callback) {
 }
 
 Lolipop.prototype.createRowStream = function (err, table) {
-  return this.connection.query('SELECT * FROM ' + mysql.escapeId(table)).stream();
+  return this.pool.query('SELECT * FROM ' + mysql.escapeId(table)).stream();
 }
 
 Lolipop.prototype.createRowStreamWhere = function (err, table, obj) {
-  return this.connection.query('SELECT * FROM ' + mysql.escapeId(table) + ' WHERE ' + mysql.escape(obj)).stream();
+  return this.pool.query('SELECT * FROM ' + mysql.escapeId(table) + ' WHERE ' + mysql.escape(obj)).stream();
 }
 
 Lolipop.prototype.end = function (callback) {
@@ -47,6 +47,6 @@ Lolipop.prototype.end = function (callback) {
     this.connection.end(callback());
   }
   else {
-    this.connection.end();
+    this.pool.end();
   }
 }
