@@ -33,8 +33,16 @@ You can define this in the config.json file
 like the included example [config.json](./config.json)
 
 
-Closing
--------
+Closing [BROKEN]
+----------------
+
+<h3>Currently Broken!</h3>
+
+Currently evaluating the problem.  Might contact node-mysql
+
+developer for a fix...
+
+<h3>Broken (for reference; DO NOT USE):</h3>
 
 You should always close the connection using:
 ~~~~
