@@ -44,7 +44,7 @@ Lolipop.prototype.createRowStreamWhere = function (err, table, obj) {
 
 Lolipop.prototype.end = function (callback) {
   if (callback && typeof(callback) === "function") {
-    this.connection.end(callback());
+    this.pool.end(callback());
   }
   else {
     this.pool.end();
