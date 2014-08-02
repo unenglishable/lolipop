@@ -8,13 +8,23 @@ Configuration
 
 Configuration can be stored in a json file.
 
+Options are described in node-mysql [connection
+options](https://github.com/felixge/node-mysql#connection-options).
+
+Implementation is with pools, so you can also use node-mysql [pooling
+options](https://github.com/felixge/node-mysql#pool-options).
+
+To make full use of the connectionLimit option, have your queries share a
+lolipop instance.
+
 <h3>config.json</h3>
 ~~~~
 {
   "host" : "localhost",
   "user" :  "lolipop",
   "password" :  "",
-  "database" : "lolipoptest"
+  "database" : "lolipoptest",
+  "connectionLimit": 5
 }
 ~~~~
 
@@ -33,16 +43,8 @@ You can define this in the config.json file
 like the included example [config.json](./config.json)
 
 
-Closing [BROKEN]
-----------------
-
-<h3>Currently Broken!</h3>
-
-Currently evaluating the problem.  Might contact node-mysql
-
-developer for a fix...
-
-<h3>Broken (for reference; DO NOT USE):</h3>
+Closing
+-------
 
 You should always close the connection using:
 ~~~~

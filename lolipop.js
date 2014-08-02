@@ -18,7 +18,7 @@ Lolipop.prototype.getTables = function (err, callback) {
     rows.forEach(function (row) {
       tables.push(row[Object.keys(row)[0]]);
     });
-    callback(null, tables);
+    return callback(null, tables);
   });
 }
 
@@ -29,7 +29,7 @@ Lolipop.prototype.getColumns = function (err, table, callback) {
 
   this.pool.query('SHOW columns FROM ' + mysql.escapeId(table), function (err, rows) {
     if (callback && typeof(callback) === "function") {
-      callback(null, rows);
+      return callback(null, rows);
     }
   });
 }
